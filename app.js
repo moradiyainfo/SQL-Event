@@ -9,9 +9,17 @@ const socketIO = require('socket.io');
 const io = socketIO.listen(server);
 const {database} = require('./config/helpers');
 
+app.get('/',function(req,res)
+
+{
+res.sendFile(__dirname + '/index.html');
+});
+
+
+
 // Middlewares
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: 'http://localhost:3000',
     credentials: true
 }));
 app.use(express.json());
@@ -27,7 +35,7 @@ io.sockets.on('connection', (socket) => {
     database.table('products')
         .withFields(['id', 'title', 'quantity', 'price'])
         .sort({id: -1})
-        .getAll()
+        c.getAll()
         .then(prods => {
             data = prods;
             io.sockets.emit('initial', {prods: [...data]});
@@ -39,7 +47,7 @@ const program = async () => {
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '123456'
+        password: ''
     });
 
     // Create MySQLEvents
