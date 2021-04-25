@@ -96,7 +96,9 @@ const program = async () => {
                     } else {
                         return;
                     }
-                    break;
+
+                    
+                    break;   
 
                 case "INSERT":
                     database.table('products')
